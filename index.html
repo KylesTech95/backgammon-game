@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Backgammon</title>
 </head>
-    <body>
+    <body>      
             <div id="gameboard-container">
+                <div id="game-border-parent">
                     <div id="game-border">
                         <div id="side1">
                             <div class="triangle tri space"></div>
@@ -23,7 +24,9 @@
                             <div class="triangle tri space"></div>
                             <div class="triangle tri space"></div>
                         </div>
-                            <hr class="middle divider mid">
+                            <div class="middle-container">
+                            </div>
+                            
                         <div id="side2">
                             <div class="triangle tri space"></div>
                             <div class="triangle tri space"></div>
@@ -38,8 +41,11 @@
                             <div class="triangle tri space"></div>
                             <div class="triangle tri space"></div>
                         </div>
-                <span id="score-player1"></span><span id="score-player1"></span>
+                            <div id="goal-container">
+                                <div class="goal" id="score-player1"></div><div class="goal" id="score-player2"></div>
+                            </div>
                 </div>
+              </div>
             </div>
     </body>
     <script src="index.js"></script>
