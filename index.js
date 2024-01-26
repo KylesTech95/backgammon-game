@@ -12,8 +12,8 @@ let firstRightDice = allDice[6]
 let midDice = [firstLeftDice,firstRightDice]
 
 // Identify al dice except middle
-for(let x = 0; x < allDiceButMid.length;x++){
-    allDiceButMid[x].style='background-color:blue'
+for(let index = 0; index < allDiceButMid.length;index++){
+    allDiceButMid[index].style=`background-color:blue;z-index:99${index};position:absolute;`
 }
 const gray = `border-bottom: 18rem solid grey;`
 const brown = `border-bottom: 18rem solid brown;`
