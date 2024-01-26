@@ -121,6 +121,9 @@ body{
 
 /* portrait mode */
 @media screen and (max-height: 950px) and (max-width:475px){
+    body{
+        overflow:hidden
+    }
     #gameboard-container{
         height:50vh;
         margin-top:3rem;
@@ -166,6 +169,9 @@ body{
 }
 /* landscape mode */
 @media screen and (max-height: 475px) and (max-width:950px){
+    body{
+        overflow:hidden
+    }
     .tri{
         height: 200px;
         width: 75px;
@@ -174,12 +180,12 @@ body{
         margin: 0 -.5rem;
     }
     #gameboard-container{
-        height:350px;
+        height:300px;
         width: 100%;
     }
    
     #goal-container{
-        height:300px;
+        height:265px;
         width:35px;
     }
     #side1{
