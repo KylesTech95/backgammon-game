@@ -43,8 +43,7 @@ body{
     justify-content: center;
     align-items: center;
     box-shadow: inset 0 0 6px 3.25px #333;
-    background-image: url('./media/leather.jpeg');
-    background-blend-mode:overlay;
+    /* background-image: url('./media/leather.jpeg'); */
 }
 
 .triangle{
@@ -69,8 +68,8 @@ body{
     box-shadow: inset 0 0 6px .25px #333;
     height:inherit;
     width:inherit;
-    background-image: url('./media/leather.jpeg');
-    background-blend-mode:overlay;
+    /* background-image: url('./media/leather.jpeg'); */
+    /* background-blend-mode:overlay; */
     background-color:silver;
 }
 /* #score-player2{
