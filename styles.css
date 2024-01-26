@@ -48,11 +48,18 @@ body{
 
 #dice-container{
     position:absolute;
-    z-index:999
+    z-index:999;
+}
+.dice-daddy-relative{
+    position:relative;
+    display:flex;
+    position:relative;
+    gap:.5rem;
 }
 #dice-container1,
 #dice-container2{
     display:flex;
+    
 }
 .dice{
     height:75px;
