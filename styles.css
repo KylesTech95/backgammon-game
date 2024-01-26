@@ -136,15 +136,14 @@ body{
 }
 .tile-p1,
 .tile-p2{
-    height:50px;
-    width:50px;
+    height:33px;
+    width:33px;
     overflow:auto;
     border-radius:50%;
     
 }
 .tri-container{
     border:2px solid purple;
-    height:300px;
     width:100px;
     display:flex;
     flex-direction: column;
