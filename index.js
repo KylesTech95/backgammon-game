@@ -26,4 +26,16 @@ for(let i=0;i<triContainerArr.length;i++){
 }
 console.log(side1Arr)
 console.log(side2Arr)
+let side1Btm = side1.getBoundingClientRect().y
+let side2Btm = side2.getBoundingClientRect().y+side2.getBoundingClientRect().height
+
+side1Arr.forEach(tri=>{
+    let triHeight=tri.getBoundingClientRect().y
+    tri.style=`transform:translate(0,${triHeight-side1Btm}px)`  
+})
+console.log(side2Btm)
+side2Arr.forEach(tri=>{
+    let triY=tri.getBoundingClientRect().y+tri.getBoundingClientRect().height
+        tri.style=`transform:translate(0,${(side2Btm - triY)}px)`
+})
 
