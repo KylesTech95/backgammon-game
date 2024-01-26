@@ -12,7 +12,7 @@ const brown = `border-bottom: 18rem solid brown;`
 triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
 
 
-// target side 1
+// target player sides & bring them to edge of board
 for(let i=0;i<triContainerArr.length;i++){
     // console.log(triContainerArr[i])
     // testing for current y position in tri-containers
@@ -24,8 +24,8 @@ for(let i=0;i<triContainerArr.length;i++){
         side2Arr.push(triContainerArr[i])
     }
 }
-console.log(side1Arr)
-console.log(side2Arr)
+// console.log(side1Arr)
+// console.log(side2Arr)
 let side1Btm = side1.getBoundingClientRect().y
 let side2Btm = side2.getBoundingClientRect().y+side2.getBoundingClientRect().height
 
