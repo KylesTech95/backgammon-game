@@ -5,7 +5,16 @@ let side2 = document.getElementById('side2')
 let side2Arr=[]
 let triContainerArr = document.querySelectorAll('.tri-container')
 let tiles = document.querySelectorAll('.tile')
+let allDice = document.querySelectorAll('.dice')
+let allDiceButMid = [...allDice].filter((_,i)=>i<5||i>6)
+let firstLeftDice = allDice[5]
+let firstRightDice = allDice[6]
+let midDice = [firstLeftDice,firstRightDice]
 
+// Identify al dice except middle
+for(let x = 0; x < allDiceButMid.length;x++){
+    allDiceButMid[x].style='background-color:blue'
+}
 const gray = `border-bottom: 18rem solid grey;`
 const brown = `border-bottom: 18rem solid brown;`
 //change triangle colors with modulo
@@ -39,3 +48,4 @@ side2Arr.forEach(tri=>{
         tri.style=`transform:translate(0,${(side2Btm - triY)}px)`
 })
 
+// center all dice close to the middle
