@@ -119,3 +119,83 @@ body{
 #side2>.tri:nth-child(6){
     margin-right:2rem;
 }
+
+/* portrait mode */
+@media screen and (max-height: 950px) and (max-width:400px){
+    #gameboard-container{
+        height:50vh
+    }
+    #game-border{
+        height:80%;
+    }
+    .tri{
+        border-right: 25px solid transparent;
+        border-left: 25px solid transparent;  
+        margin:0 -1.20rem;
+    }
+    #goal-container{
+        height:300px;
+        width:15px;
+        right:2px;
+        gap:.5rem;
+    }
+    #side1{
+        top:-10rem;
+        gap:14px;
+    }
+    .middle-container{
+        height:12.5px;  
+    }
+    #side2{
+        bottom:-10rem;
+        gap:14px;
+
+    }
+    #side1>.tri:nth-child(7){
+        margin-left:-.25rem;
+    }
+    #side1>.tri:nth-child(6){
+        margin-right:-.25rem;
+    }
+    #side2>.tri:nth-child(7){
+        margin-left:-.25rem;
+    }
+    #side2>.tri:nth-child(6){
+        margin-right:-.25rem;
+    }
+}
+/* landscape mode */
+@media screen and (max-height: 400px) and (max-width:950px){
+    .tri{
+        height: 200px;
+        width: 75px;
+        border-right: 37px solid transparent;
+        border-left: 37px solid transparent;  
+        margin: 0 -.5rem;
+    }
+    #goal-container{
+        height:300px;
+        width:35px;
+    }
+    #side1{
+        top:-8rem;
+    }
+    .middle-container{
+        height:25px;  
+    }
+    #side2{
+        bottom:-8rem;
+    }
+    #side1>.tri:nth-child(7){
+        margin-left:.75rem;
+    }
+    #side1>.tri:nth-child(6){
+        margin-right:.75rem;
+    }
+    #side2>.tri:nth-child(7){
+        margin-left:.75rem;
+    }
+    #side2>.tri:nth-child(6){
+        margin-right:.75rem;
+    }
+}
