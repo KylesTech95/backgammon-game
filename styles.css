@@ -173,18 +173,23 @@ body{
         border-left: 37px solid transparent;  
         margin: 0 -.5rem;
     }
+    #gameboard-container{
+        height:350px;
+        width: 100%;
+    }
+   
     #goal-container{
         height:300px;
         width:35px;
     }
     #side1{
-        top:-8rem;
+        top:-9.25rem;
     }
     .middle-container{
         height:25px;  
     }
-    #side2{
-        bottom:-8rem;
+    #side2{ 
+        bottom:-9.25rem;
     }
     #side1>.tri:nth-child(7){
         margin-left:.75rem;
