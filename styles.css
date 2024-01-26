@@ -51,6 +51,8 @@ body{
     width: 75px;
     border-right: 48px solid transparent;
     border-left: 48px solid transparent;
+    /* border:2px solid yellow; */
+    display:inline-block;
 }
 #goal-container{
    display:flex;
@@ -118,6 +120,23 @@ body{
 #side2>.tri:nth-child(6){
     margin-right:2rem;
 }
+
+.tile-p1{
+    background:green;
+}
+.tile-p2{
+    background:indigo;
+}
+.tile-p1,
+.tile-p2{
+    height:50px;
+    width:50px;
+    overflow:auto;
+    border-radius:50%;
+    margin-left:-1.5rem;  
+}
+
+
 
 /* portrait mode */
 @media screen and (max-height: 950px) and (max-width:475px){
