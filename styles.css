@@ -93,6 +93,7 @@ body{
 }
 #side2{
     bottom:0;
+    border:5px solid blue;
 }
 #side1,#side2{
     display:flex;
