@@ -35,7 +35,6 @@ body{
     width: 75px;
     border-right: 50px solid transparent;
     border-left: 50px solid transparent;
-    border-bottom:18rem solid grey;
 }
 #side1{
     display:flex;
