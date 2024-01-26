@@ -177,7 +177,7 @@ body{
         width: 75px;
         border-right: 37px solid transparent;
         border-left: 37px solid transparent;  
-        margin: 0 -.5rem;
+        margin: 0 -.75rem;
     }
     #gameboard-container{
         height:300px;
@@ -186,16 +186,16 @@ body{
    
     #goal-container{
         height:265px;
-        width:35px;
+        width:30px;
     }
     #side1{
-        top:-9.25rem;
+        top:-11.25rem;
     }
     .middle-container{
         height:25px;  
     }
     #side2{ 
-        bottom:-9.25rem;
+        bottom:-11.25rem;
     }
     #side1>.tri:nth-child(7){
         margin-left:.75rem;
