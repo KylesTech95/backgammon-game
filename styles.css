@@ -120,9 +120,10 @@ body{
 }
 
 /* portrait mode */
-@media screen and (max-height: 950px) and (max-width:400px){
+@media screen and (max-height: 950px) and (max-width:475px){
     #gameboard-container{
-        height:50vh
+        height:50vh;
+        margin-top:3rem;
     }
     #game-border{
         height:80%;
@@ -164,7 +165,7 @@ body{
     }
 }
 /* landscape mode */
-@media screen and (max-height: 400px) and (max-width:950px){
+@media screen and (max-height: 475px) and (max-width:950px){
     .tri{
         height: 200px;
         width: 75px;
