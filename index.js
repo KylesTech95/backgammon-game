@@ -13,6 +13,7 @@ let midDice = [firstLeftDice,firstRightDice]
 
 // Identify al dice except middle
 for(let index = 0; index < allDiceButMid.length;index++){
+    // center dice in line with the first 2 on each side
     allDiceButMid[index].style=`background-color:blue;z-index:99${index};position:absolute;`
 }
 const gray = `border-bottom: 18rem solid grey;`
@@ -48,4 +49,21 @@ side2Arr.forEach(tri=>{
         tri.style=`transform:translate(0,${(side2Btm - triY)}px)`
 })
 
-// center all dice close to the middle
+// generate random dice
+function randomDice(){
+    // store random dice into a variable
+    let randomNum = [...allDice][Math.floor(Math.random()*allDice.length)]
+    return randomNum
+}
+
+let shuffleRandomDice = () => {
+    for(let i = 0; i < allDice.length; i++){
+        setTimeout(()=>{
+            if(allDice[i]===randomNum){
+                let len = allDice[i].children.length
+                console.log(len)
+            }
+          
+        },100*(i+1))
+    }
+}
