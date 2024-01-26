@@ -46,6 +46,7 @@ body{
     /* background-image: url('./media/leather.jpeg'); */
 }
 
+
 .triangle{
     height: 200px;
     width: 75px;
@@ -53,6 +54,11 @@ body{
     border-left: 48px solid transparent;
     /* border:2px solid yellow; */
     display:inline-block;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    
 }
 #goal-container{
    display:flex;
@@ -83,6 +89,7 @@ body{
 #side1{
     transform: rotate(180deg);
     top:0; 
+    border:5px solid blue;
 }
 #side2{
     bottom:0;
@@ -133,7 +140,18 @@ body{
     width:50px;
     overflow:auto;
     border-radius:50%;
-    margin-left:-1.5rem;  
+    
+}
+.tri-container{
+    border:2px solid purple;
+    height:300px;
+    width:100px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:4px;
+    
 }
 
 
