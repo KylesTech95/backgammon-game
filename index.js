@@ -7,14 +7,20 @@ let triContainerArr = document.querySelectorAll('.tri-container')
 let tiles = document.querySelectorAll('.tile')
 let allDice = document.querySelectorAll('.dice')
 let allDiceButMid = [...allDice].filter((_,i)=>i<5||i>6)
+let allLeftDice = document.getElementById('dice-container1')
+let allRightDice = document.getElementById('dice-container2')
 let firstLeftDice = allDice[5]
 let firstRightDice = allDice[6]
 let midDice = [firstLeftDice,firstRightDice]
+let btnDisplay = document.querySelector('.bet')
+let p1Bet
+let p2Bet
+let betArr = []
 
 // Identify al dice except middle
 for(let index = 0; index < allDiceButMid.length;index++){
     // center dice in line with the first 2 on each side
-    allDiceButMid[index].style=`background-color:blue;z-index:99${index};position:absolute;`
+    allDiceButMid[index].style=`background-color:blue;position:absolute;`
 }
 const gray = `border-bottom: 18rem solid grey;`
 const brown = `border-bottom: 18rem solid brown;`
@@ -57,13 +63,12 @@ function randomDice(){
 }
 
 let shuffleRandomDice = () => {
-    for(let i = 0; i < allDice.length; i++){
-        setTimeout(()=>{
-            if(allDice[i]===randomNum){
-                let len = allDice[i].children.length
-                console.log(len)
-            }
-          
-        },100*(i+1))
-    }
+   
+}
+
+function iPlay(){
+btnDisplay.textContent = 'You go first' 
+}
+function theyPlay(){
+    btnDisplay.textContent = 'They go first' 
 }
