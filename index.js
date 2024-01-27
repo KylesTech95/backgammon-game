@@ -16,12 +16,8 @@ let btnDisplay = document.querySelector('.bet')
 let p1Bet
 let p2Bet
 let betArr = []
+let test = []
 
-// Identify al dice except middle
-for(let index = 0; index < allDiceButMid.length;index++){
-    // center dice in line with the first 2 on each side
-    allDiceButMid[index].style=`background-color:blue;position:absolute;`
-}
 const gray = `border-bottom: 18rem solid grey;`
 const brown = `border-bottom: 18rem solid brown;`
 //change triangle colors with modulo
@@ -55,19 +51,47 @@ side2Arr.forEach(tri=>{
         tri.style=`transform:translate(0,${(side2Btm - triY)}px)`
 })
 
+// Identify al dice except middle
+for(let index = 0; index < allDiceButMid.length;index++){
+    // center dice in line with the first 2 on each side
+    allDiceButMid[index].style=`position:absolute;`
+}
+
+
 // generate random dice
-function randomDice(){
+function randomDice(diceSet){
     // store random dice into a variable
-    let randomNum = [...allDice][Math.floor(Math.random()*allDice.length)]
+    let randomNum = [...diceSet][Math.floor(Math.random()*diceSet.length)]
     return randomNum
 }
 
 let shuffleRandomDice = () => {
-   
-}
+    // method
+    let arr = [allLeftDice,allRightDice]
+    arr.forEach((section,index)=>{
+        let children = [...section.children]
+        children.forEach((child,i)=>{
+            setTimeout(()=>{
+                let n = randomDice(children)
 
+                    setTimeout(()=>{
+                    
+                        child = n;
+                        
+                        child.classList.remove('disappear')
+                        child.classList.add('appear')
+                    },250*(i+1))
+                
+
+                   
+                
+            })
+        })
+    })
+
+}
 function iPlay(){
-btnDisplay.textContent = 'You go first' 
+    btnDisplay.textContent = 'You go first' 
 }
 function theyPlay(){
     btnDisplay.textContent = 'They go first' 

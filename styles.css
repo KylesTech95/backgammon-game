@@ -63,17 +63,24 @@ body{
     
 }
 .dice{
-    opacity:1;
+    background:indigo;
+    transition:.2s;
     height:75px;
     width: 75px;
     border-radius: 12px;
-    background:#333;
-    border:2px solid red;
     display:flex;
     flex-direction: row;
+    box-shadow: inset 0 0 6px .25px #fff;
     align-items: center;
     justify-content: space-evenly;
     
+}
+.appear{
+    opacity:1
+}
+
+.disappear{
+    opacity:0;
 }
 .d6{
     gap:1rem;
