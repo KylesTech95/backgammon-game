@@ -58,37 +58,49 @@ for(let index = 0; index < allDiceButMid.length;index++){
 }
 
 
-// generate random dice
-function randomDice(diceSet){
-    // store random dice into a variable
-    let randomNum = [...diceSet][Math.floor(Math.random()*diceSet.length)]
-    return randomNum
-}
 
+let t1=[]
+let t2=[]
 let shuffleRandomDice = () => {
     // method
     let arr = [allLeftDice,allRightDice]
-    arr.forEach((section,index)=>{
-        let children = [...section.children]
-        children.forEach((child,i)=>{
+    let i = 0;
+    let children = allLeftDice.children
+    let len = children.length
+    // add z-index to bring last dice to top
+    let z = -1;
+// generate random dice
+function randomDice(){
+    // store random dice into a variable
+    let randomNum = children[Math.floor(Math.random()*children.length)]
+    return randomNum
+}
+    for(i,z;len > i && z < 5;len--,z++){
+        
+        setTimeout(()=>{
+            let n = randomDice()
+            let ch = children[len]
+            ch=n
+            console.log(ch)
+            ch.classList.remove('disappear')
+            ch.classList.add('appear')
+            ch.style = `z-index:99${z};position:absolute;`
             setTimeout(()=>{
-                let n = randomDice(children)
-
-                    setTimeout(()=>{
-                    
-                        child = n;
-                        
-                        child.classList.remove('disappear')
-                        child.classList.add('appear')
-                    },250*(i+1))
-                
-
-                   
-                
-            })
-        })
-    })
-
+            ch.style = `z-index:none;position:absolute;`
+        
+    },1200)
+         t1.push(ch)
+        },1000*(z+1))
+        
+    }
+    // setTimeout(()=>{
+    //     return [...children].forEach(child=>{
+    //         child.style=`z-index:none;position:absolute;`
+    //         child.classList.add('disappear')
+    //         child.classList.remove('appear')
+    //     })
+    // },8000)
+    
 }
 function iPlay(){
     btnDisplay.textContent = 'You go first' 
