@@ -221,6 +221,10 @@ justify-content: center; */
     text-align: center;
     z-index:998;
     transition:.25s;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 @keyframes blow {
     from{ 

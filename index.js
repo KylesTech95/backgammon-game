@@ -20,8 +20,10 @@ let betArr2 = []
 let betBtn = document.querySelector('.bet')
 let dice_audio = document.querySelector('audio')
 let odd,even;
+let lastRollComp,lastRollPlayer
 const gray = `border-bottom: 18rem solid grey;`
 const brown = `border-bottom: 18rem solid brown;`
+let compMove = false, playerMove = false;
 //change triangle colors with modulo
 triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
 
@@ -52,8 +54,18 @@ side2Arr.forEach(tri=>{
         tri.style=`transform:translate(0,${(side2Btm - triY)}px)`
 })
 
+// after each player finishes their move
+function clearDice(){
+    allDice.forEach(d=>{
+        d.classList.remove('appear')
+        d.classList.add('disappear')
+    })
+}
 
 
+
+
+// shuffle dice
 let shuffleRandomDice = () => {
    odd = [...allDice].filter((x,i)=>i%2!==0).forEach(d=>d.classList.add('dice-rotate-odd'))
    even = [...allDice].filter((x,i)=>i%2==0).forEach(d=>d.classList.add('dice-rotate-even'))
@@ -125,7 +137,13 @@ setTimeout(()=>{
     arr.forEach((side,index) =>{
         let children = [...side]
         let lastRoll = children[side.length-1]
-        // console.log(lastRoll)
+        console.log(lastRoll)
+        if(index===0){
+            lastRollComp = lastRoll.children.length
+        }
+        else{
+            lastRollPlayer = lastRoll.children.length
+        }
         children.forEach(child=>{
             if(child!==lastRoll){
                 child.classList.remove('appear')
@@ -146,12 +164,38 @@ setTimeout(()=>{
     betBtn.classList.add('appear')
     betBtn.removeAttribute('disabled',true)
     // console.log('CLEARED')
+    if(lastRollComp > lastRollPlayer){
+        setTimeout(()=>{
+                btnDisplay.textContent = 'Throw Dice' 
+        },3000)
+        theyPlay()
+    }
+    if(lastRollComp < lastRollPlayer){
+        setTimeout(()=>{
+                btnDisplay.textContent = 'Throw Dice' 
+        },3000)
+        iPlay()
+    }
+    if(lastRollComp===lastRollPlayer){
+        setTimeout(()=>{
+                btnDisplay.textContent = 'Throw Dice';
+                clearDice()
+        },3000)
+        tie()
+    }
     },1150)
+    
 }
-// function iPlay(){
-//     btnDisplay.textContent = 'You go first' 
-// }
-// function theyPlay(){
-//     btnDisplay.textContent = 'They go first' 
-// }  
+// player plays
+function iPlay(){
+    btnDisplay.textContent = 'Player moves first'
+}
+// computer plays
+function theyPlay(){
+    btnDisplay.textContent = 'Computer moves first' 
+}  
+// tie
+function tie(){
+    btnDisplay.textContent = 'Tie'
+}
 
