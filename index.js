@@ -51,56 +51,27 @@ side2Arr.forEach(tri=>{
         tri.style=`transform:translate(0,${(side2Btm - triY)}px)`
 })
 
-// Identify al dice except middle
-for(let index = 0; index < allDiceButMid.length;index++){
-    // center dice in line with the first 2 on each side
-    allDiceButMid[index].style=`position:absolute;`
-}
+// Identify all dice except middle
+// for(let index = 0; index < allDiceButMid.length;index++){
+//     // center dice in line with the first 2 on each side
+//     allDiceButMid[index].style=`position:absolute;`
+// }
 
 
 
-let t1=[]
-let t2=[]
 let shuffleRandomDice = () => {
-    // method
-    let arr = [allLeftDice,allRightDice]
-    let i = 0;
-    let children = allLeftDice.children
-    let len = children.length
-    // add z-index to bring last dice to top
-    let z = -1;
-// generate random dice
-function randomDice(){
-    // store random dice into a variable
-    let randomNum = children[Math.floor(Math.random()*children.length)]
-    return randomNum
+    let leftDice = [...allLeftDice.children]
+for(let i = 0; i < leftDice.length; i++){
+    let random = leftDice[Math.floor(Math.random()*leftDice.length)]
+    setTimeout(()=>{
+        leftDice[i]=random
+        leftDice[i].classList.remove('disappear')
+        leftDice[i].classList.add('appear')
+        console.log(leftDice[i])
+        // console.log(random)
+        // console.log(leftDice[i])
+    },250*(i+1))
 }
-    for(i,z;len > i && z < 5;len--,z++){
-        
-        setTimeout(()=>{
-            let n = randomDice()
-            let ch = children[len]
-            ch=n
-            console.log(ch)
-            ch.classList.remove('disappear')
-            ch.classList.add('appear')
-            ch.style = `z-index:99${z};position:absolute;`
-            setTimeout(()=>{
-            ch.style = `z-index:none;position:absolute;`
-        
-    },1200)
-         t1.push(ch)
-        },1000*(z+1))
-        
-    }
-    // setTimeout(()=>{
-    //     return [...children].forEach(child=>{
-    //         child.style=`z-index:none;position:absolute;`
-    //         child.classList.add('disappear')
-    //         child.classList.remove('appear')
-    //     })
-    // },8000)
-    
 }
 function iPlay(){
     btnDisplay.textContent = 'You go first' 
