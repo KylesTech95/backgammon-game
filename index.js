@@ -49,12 +49,6 @@ side2Arr.forEach(tri=>{
         tri.style=`transform:translate(0,${(side2Btm - triY)}px)`
 })
 
-// Identify all dice except middle
-// for(let index = 0; index < allDiceButMid.length;index++){
-//     // center dice in line with the first 2 on each side
-//     allDiceButMid[index].style=`position:absolute;`
-// }
-
 
 
 let shuffleRandomDice = () => {
@@ -64,6 +58,20 @@ for(let i = 0; i < leftDice.length; i++){
     betArr.push(random)
 }
 console.log(betArr)
+for(let x = 0; x < betArr.length; x++){
+    let lefty = leftDice[x]
+    lefty=betArr[x]
+    setTimeout(()=>{
+        lefty.classList.remove('disappear')
+        lefty.classList.add('appear')
+        if(x!==betArr.length-1){
+            setTimeout(()=>{
+                lefty.classList.add('disappear')
+                lefty.classList.remove('appear') 
+            },150)
+        }
+    },150*(x+1))
+}
 }
 function iPlay(){
     btnDisplay.textContent = 'You go first' 

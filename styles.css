@@ -56,11 +56,22 @@ body{
     display:flex;
     position:relative;
     gap:.5rem;
+    border:2px solid red;
+    align-items:center;
+    justify-content: center;
+    height:250px;
+    width:400px;
 }
 #dice-container1,
 #dice-container2{
-    display:flex;
-    
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+border:2px solid red;
+width:75%;
+height:250px;
+/* flex-direction: row;
+align-items: center;
+justify-content: center; */
 }
 .dice{
     background:indigo;
