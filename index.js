@@ -26,13 +26,6 @@ const brown = `border-bottom: 18rem solid brown;`
 triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
 
 
-// no keydown events
-window.addEventListener("keypress",e=>{
-    let key = e.key||window
-   if(key===' '){
-    e.preventDefault()
-   }
-})
 // target player sides & bring them to edge of board
 for(let i=0;i<triContainerArr.length;i++){
     // console.log(triContainerArr[i])
@@ -70,6 +63,7 @@ if(!dice_audio.playing){
     betBtn.style.pointerEvents="none";
     betBtn.setAttribute('disabled',true)
     betBtn.classList.add('disappear')
+    betBtn.classList.remove('appear')
     let leftDice = [...allLeftDice.children]
     let rightDice = [...allRightDice.children]
 
@@ -99,6 +93,7 @@ for(let x = 0; x < betArr2.length; x++){
     let righty = rightDice[x]
     righty=betArr2[x]
     setTimeout(()=>{
+        
         righty.classList.remove('disappear')
         righty.classList.add('appear')
         if(x!==betArr2.length-1){
@@ -112,6 +107,10 @@ for(let x = 0; x < betArr2.length; x++){
 setTimeout(()=>{
 betArr=[]
 betArr2=[]
+betBtn.style.pointerEvents="auto";
+betBtn.classList.remove('disappear')
+betBtn.classList.add('appear')
+betBtn.removeAttribute('disabled',true)
 console.log('CLEARED')
 },1150)
 }
