@@ -26,6 +26,13 @@ const brown = `border-bottom: 18rem solid brown;`
 triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
 
 
+// no keydown events
+window.addEventListener("keypress",e=>{
+    let key = e.key||window
+   if(key===' '){
+    e.preventDefault()
+   }
+})
 // target player sides & bring them to edge of board
 for(let i=0;i<triContainerArr.length;i++){
     // console.log(triContainerArr[i])
@@ -55,12 +62,13 @@ side2Arr.forEach(tri=>{
 
 
 let shuffleRandomDice = () => {
+    //start shuffle audio
 if(!dice_audio.playing){
     dice_audio.play()
-
 }
     // set pointer event for button to none
     betBtn.style.pointerEvents="none";
+    betBtn.setAttribute('disabled',true)
     betBtn.classList.add('disappear')
     let leftDice = [...allLeftDice.children]
     let rightDice = [...allRightDice.children]
@@ -79,9 +87,9 @@ for(let x = 0; x < betArr.length; x++){
             setTimeout(()=>{
                 lefty.classList.add('disappear')
                 lefty.classList.remove('appear') 
-            },150)
+            },175)
         }
-    },150*(x+1))
+    },175*(x+1))
 }
 for(let i = 0; i < rightDice.length; i++){
     let random = rightDice[Math.floor(Math.random()*rightDice.length)]
@@ -97,9 +105,9 @@ for(let x = 0; x < betArr2.length; x++){
             setTimeout(()=>{
                 righty.classList.add('disappear')
                 righty.classList.remove('appear') 
-            },150)
+            },175)
         }
-    },150*(x+1))
+    },175*(x+1))
 }
 setTimeout(()=>{
 betArr=[]
