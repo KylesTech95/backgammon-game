@@ -19,7 +19,7 @@ let betArr = []
 let betArr2 = []
 let betBtn = document.querySelector('.bet')
 let dice_audio = document.querySelector('audio')
-
+let odd,even;
 const gray = `border-bottom: 18rem solid grey;`
 const brown = `border-bottom: 18rem solid brown;`
 //change triangle colors with modulo
@@ -55,6 +55,9 @@ side2Arr.forEach(tri=>{
 
 
 let shuffleRandomDice = () => {
+   odd = [...allDice].filter((x,i)=>i%2!==0).forEach(d=>d.classList.add('dice-rotate-odd'))
+   even = [...allDice].filter((x,i)=>i%2==0).forEach(d=>d.classList.add('dice-rotate-even'))
+
     //start shuffle audio
 if(!dice_audio.playing){
     dice_audio.play()
@@ -74,6 +77,7 @@ for(let i = 0; i < leftDice.length; i++){
 for(let x = 0; x < betArr.length; x++){
     let lefty = leftDice[x]
     lefty=betArr[x]
+
     setTimeout(()=>{
         lefty.classList.remove('disappear')
         lefty.classList.add('appear')
@@ -111,14 +115,14 @@ arr.forEach((side,index) =>{
         console.log(lastRoll)
 })
 
-console.log(b1,b2)
 setTimeout(()=>{
-    
+     odd = [...allDice].filter((x,i)=>i%2!==0).forEach(d=>d.classList.remove('dice-rotate-odd'))
+     even = [...allDice].filter((x,i)=>i%2==0).forEach(d=>d.classList.remove('dice-rotate-even'))
     betArr=[]
     betArr2=[]
-    // betBtn.style.pointerEvents="auto";
-    // betBtn.classList.remove('disappear')
-    // betBtn.classList.add('appear')
+    betBtn.style.pointerEvents="auto";
+    betBtn.classList.remove('disappear')
+    betBtn.classList.add('appear')
     betBtn.removeAttribute('disabled',true)
     console.log('CLEARED')
     },1150)

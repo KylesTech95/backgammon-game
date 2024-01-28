@@ -68,12 +68,22 @@ display:grid;
 grid-template-columns: 1fr 1fr 1fr;
 width:75%;
 height:250px;
+position:absolute;
 
 /* flex-direction: row;
 align-items: center;
 justify-content: center; */
 }
+#dice-container1>.dice{
+    left:15%;
+}
+#dice-container2>.dice{
+    right:15%;
+}
+
 .dice{
+    top: 75px;
+    position:absolute;
     background:indigo;
     transition:.2s;
     height:60px;
@@ -86,6 +96,48 @@ justify-content: center; */
     justify-content: space-evenly;
     
 }
+/*dice rotate animation*/
+.dice-rotate-odd{
+    animation:dRotateOdd .75s infinite alternate ease-in-out forwards;
+}
+@keyframes dRotateOdd {
+    0%{
+        transform:rotate(20deg)
+    }
+    25%{
+        transform:rotate(-20deg)
+    }
+    50%{
+        transform:rotate(20deg)
+    }
+    0%{
+        transform:rotate(-20deg)
+    }
+    0%{
+        transform:rotate(20deg)
+    }
+}
+.dice-rotate-even{
+    animation:dRotateEven .75s infinite alternate ease-in-out forwards;
+}
+@keyframes dRotateEven {
+    0%{
+        transform:rotate(-20deg)
+    }
+    25%{
+        transform:rotate(20deg)
+    }
+    50%{
+        transform:rotate(-20deg)
+    }
+    0%{
+        transform:rotate(20deg)
+    }
+    0%{
+        transform:rotate(-20deg)
+    }
+}
+
 .appear{
     opacity:1
 }
