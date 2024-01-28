@@ -147,7 +147,7 @@ setTimeout(()=>{
     betBtn.removeAttribute('disabled',true)
     // console.log('CLEARED')
     },1150)
-g}
+}
 // function iPlay(){
 //     btnDisplay.textContent = 'You go first' 
 // }
