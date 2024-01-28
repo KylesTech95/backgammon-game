@@ -145,23 +145,32 @@ body{
 }
 .bet{
     position:absolute;
+    text-transform: uppercase;
     font-family: 'Honk', system-ui;
-    font-size:33px;
+    font-size:30px;
     background:none;
     border:none;
     right:15%;
-    animation:blow .75s infinite alternate backwards;
+    line-height:1rem;
+    animation:blow 1s infinite alternate backwards;
     cursor:pointer;
     width:100px;
     text-align: center;
     z-index:998;
 }
 @keyframes blow {
-    from{
-        transform: scale(1);
+    from{ 
+        font-size:30px;
+        /* transform: scale(1); */
+        line-height: 1rem;
+        letter-spacing: 0px;
     }
     to{
-        transform: scale(1.15);
+        font-size:32px;
+        /* transform: scale(1.05); */
+        line-height: 1.25rem;
+        letter-spacing: 4px;
+
             }
 }
 .triangle{

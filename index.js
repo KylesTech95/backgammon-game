@@ -16,7 +16,6 @@ let btnDisplay = document.querySelector('.bet')
 let p1Bet
 let p2Bet
 let betArr = []
-let test = []
 
 const gray = `border-bottom: 18rem solid grey;`
 const brown = `border-bottom: 18rem solid brown;`
@@ -45,7 +44,6 @@ side1Arr.forEach(tri=>{
     let triHeight=tri.getBoundingClientRect().y
     tri.style=`transform:translate(0,${triHeight-side1Btm}px)`  
 })
-console.log(side2Btm)
 side2Arr.forEach(tri=>{
     let triY=tri.getBoundingClientRect().y+tri.getBoundingClientRect().height
         tri.style=`transform:translate(0,${(side2Btm - triY)}px)`
@@ -63,15 +61,9 @@ let shuffleRandomDice = () => {
     let leftDice = [...allLeftDice.children]
 for(let i = 0; i < leftDice.length; i++){
     let random = leftDice[Math.floor(Math.random()*leftDice.length)]
-    setTimeout(()=>{
-        leftDice[i]=random
-        leftDice[i].classList.remove('disappear')
-        leftDice[i].classList.add('appear')
-        console.log(leftDice[i])
-        // console.log(random)
-        // console.log(leftDice[i])
-    },250*(i+1))
+    betArr.push(random)
 }
+console.log(betArr)
 }
 function iPlay(){
     btnDisplay.textContent = 'You go first' 
