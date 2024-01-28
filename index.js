@@ -77,7 +77,7 @@ for(let x = 0; x < betArr.length; x++){
     setTimeout(()=>{
         lefty.classList.remove('disappear')
         lefty.classList.add('appear')
-        if(x!==betArr.length-1){
+        if(x<betArr.length-1){
             setTimeout(()=>{
                 lefty.classList.add('disappear')
                 lefty.classList.remove('appear') 
@@ -96,7 +96,7 @@ for(let x = 0; x < betArr2.length; x++){
         
         righty.classList.remove('disappear')
         righty.classList.add('appear')
-        if(x!==betArr2.length-1){
+        if(x<betArr2.length-1){
             setTimeout(()=>{
                 righty.classList.add('disappear')
                 righty.classList.remove('appear') 
@@ -104,19 +104,31 @@ for(let x = 0; x < betArr2.length; x++){
         }
     },175*(x+1))
 }
+
+let arr = [betArr,betArr2];
+arr.forEach((side,index) =>{
+        let lastRoll = [...side][side.length-1]
+        console.log(lastRoll)
+})
+
+console.log(b1,b2)
 setTimeout(()=>{
-betArr=[]
-betArr2=[]
-betBtn.style.pointerEvents="auto";
-betBtn.classList.remove('disappear')
-betBtn.classList.add('appear')
-betBtn.removeAttribute('disabled',true)
-console.log('CLEARED')
-},1150)
-}
-function iPlay(){
-    btnDisplay.textContent = 'You go first' 
-}
-function theyPlay(){
-    btnDisplay.textContent = 'They go first' 
-}
+    
+    betArr=[]
+    betArr2=[]
+    // betBtn.style.pointerEvents="auto";
+    // betBtn.classList.remove('disappear')
+    // betBtn.classList.add('appear')
+    betBtn.removeAttribute('disabled',true)
+    console.log('CLEARED')
+    },1150)
+
+    
+    }
+// function iPlay(){
+//     btnDisplay.textContent = 'You go first' 
+// }
+// function theyPlay(){
+//     btnDisplay.textContent = 'They go first' 
+// }  
+
