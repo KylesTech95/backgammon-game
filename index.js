@@ -16,6 +16,9 @@ let btnDisplay = document.querySelector('.bet')
 let p1Bet
 let p2Bet
 let betArr = []
+let betArr2 = []
+let betBtn = document.querySelector('.bet')
+let dice_audio = document.querySelector('audio')
 
 const gray = `border-bottom: 18rem solid grey;`
 const brown = `border-bottom: 18rem solid brown;`
@@ -52,12 +55,20 @@ side2Arr.forEach(tri=>{
 
 
 let shuffleRandomDice = () => {
+if(!dice_audio.playing){
+    dice_audio.play()
+
+}
+    // set pointer event for button to none
+    betBtn.style.pointerEvents="none";
+    betBtn.classList.add('disappear')
     let leftDice = [...allLeftDice.children]
+    let rightDice = [...allRightDice.children]
+
 for(let i = 0; i < leftDice.length; i++){
     let random = leftDice[Math.floor(Math.random()*leftDice.length)]
     betArr.push(random)
 }
-console.log(betArr)
 for(let x = 0; x < betArr.length; x++){
     let lefty = leftDice[x]
     lefty=betArr[x]
@@ -72,6 +83,29 @@ for(let x = 0; x < betArr.length; x++){
         }
     },150*(x+1))
 }
+for(let i = 0; i < rightDice.length; i++){
+    let random = rightDice[Math.floor(Math.random()*rightDice.length)]
+    betArr2.push(random)
+}
+for(let x = 0; x < betArr2.length; x++){
+    let righty = rightDice[x]
+    righty=betArr2[x]
+    setTimeout(()=>{
+        righty.classList.remove('disappear')
+        righty.classList.add('appear')
+        if(x!==betArr2.length-1){
+            setTimeout(()=>{
+                righty.classList.add('disappear')
+                righty.classList.remove('appear') 
+            },150)
+        }
+    },150*(x+1))
+}
+setTimeout(()=>{
+betArr=[]
+betArr2=[]
+console.log('CLEARED')
+},1150)
 }
 function iPlay(){
     btnDisplay.textContent = 'You go first' 

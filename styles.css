@@ -50,23 +50,23 @@ body{
 #dice-container{
     position:absolute;
     z-index:989;
+
 }
 .dice-daddy-relative{
     position:relative;
     display:flex;
     position:relative;
-    gap:.5rem;
-    border:2px solid red;
+    gap:0;
     align-items:center;
     justify-content: center;
     height:250px;
     width:400px;
+    margin:-4rem 0;
 }
 #dice-container1,
 #dice-container2{
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
-border:2px solid red;
+display:grid;
+grid-template-columns: 1fr 1fr 1fr;
 width:75%;
 height:250px;
 /* flex-direction: row;
@@ -76,8 +76,8 @@ justify-content: center; */
 .dice{
     background:indigo;
     transition:.2s;
-    height:75px;
-    width: 75px;
+    height:60px;
+    width: 60px;
     border-radius: 12px;
     display:flex;
     flex-direction: row;
@@ -168,6 +168,7 @@ justify-content: center; */
     width:100px;
     text-align: center;
     z-index:998;
+    transition:.25s;
 }
 @keyframes blow {
     from{ 
