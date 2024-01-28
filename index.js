@@ -58,7 +58,7 @@ let shuffleRandomDice = () => {
    odd = [...allDice].filter((x,i)=>i%2!==0).forEach(d=>d.classList.add('dice-rotate-odd'))
    even = [...allDice].filter((x,i)=>i%2==0).forEach(d=>d.classList.add('dice-rotate-even'))
 
-    //start shuffle audio
+//start shuffle audio
 if(!dice_audio.playing){
     dice_audio.play()
 }
@@ -87,6 +87,11 @@ for(let x = 0; x < betArr.length; x++){
                 lefty.classList.remove('appear') 
             },175)
         }
+        else{
+                lefty.classList.remove('disappear')
+                lefty.classList.add('appear') 
+            
+        }
     },175*(x+1))
 }
 for(let i = 0; i < rightDice.length; i++){
@@ -105,17 +110,33 @@ for(let x = 0; x < betArr2.length; x++){
                 righty.classList.add('disappear')
                 righty.classList.remove('appear') 
             },175)
+            
+        }
+        else{
+            righty.classList.remove('disappear')
+            righty.classList.add('appear')  
         }
     },175*(x+1))
 }
 
 let arr = [betArr,betArr2];
-arr.forEach((side,index) =>{
-        let lastRoll = [...side][side.length-1]
-        console.log(lastRoll)
-})
 
 setTimeout(()=>{
+    arr.forEach((side,index) =>{
+        let children = [...side]
+        let lastRoll = children[side.length-1]
+        // console.log(lastRoll)
+        children.forEach(child=>{
+            if(child!==lastRoll){
+                child.classList.remove('appear')
+                child.classList.add('disappear')
+            }
+            else{
+                child.classList.add('appear')
+                child.classList.remove('disappear')
+            }
+        })
+})
      odd = [...allDice].filter((x,i)=>i%2!==0).forEach(d=>d.classList.remove('dice-rotate-odd'))
      even = [...allDice].filter((x,i)=>i%2==0).forEach(d=>d.classList.remove('dice-rotate-even'))
     betArr=[]
@@ -124,11 +145,9 @@ setTimeout(()=>{
     betBtn.classList.remove('disappear')
     betBtn.classList.add('appear')
     betBtn.removeAttribute('disabled',true)
-    console.log('CLEARED')
+    // console.log('CLEARED')
     },1150)
-
-    
-    }
+g}
 // function iPlay(){
 //     btnDisplay.textContent = 'You go first' 
 // }
