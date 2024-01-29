@@ -256,8 +256,7 @@ justify-content: center; */
     display:flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
-    
+    justify-content: start;    
 }
 #goal-container1,
 #goal-container2{
@@ -312,7 +311,7 @@ left:4px;
     width: 100%;
     transform:rotate(90deg);
     position:relative;
-    height:50px;  
+    height:50px; 
     background-image: url('./media/blackWood.avif');
     /* background-repeat:no-repeat; */
     /* background-size:cover; */ 

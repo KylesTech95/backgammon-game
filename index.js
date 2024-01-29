@@ -175,7 +175,7 @@ setTimeout(()=>{
     betBtn.removeAttribute('disabled',true)
     
     // store both dice into available_moves
-    available_moves = [circ1.length===0?1:circ1.length,circ2.length===0?1:circ2.length]
+    available_moves = [circ1.length===0?1:circ1.length,circ2.length===0?1:circ2.length,circ1.length+circ2.length]
     // console.log('CLEARED')
     if(circ1.length > circ2.length){
         theyPlay()
@@ -200,14 +200,19 @@ const movesFromTriangle = (tri,moves,who) => {
 // console.log(moves)
 if((/player/).test(who)){
     for(let i=0; i<triArr.length;i++){
-        let opt1 = moves[0], opt2 = moves[1]
+        let opt1 = moves[0], opt2 = moves[1], opt3 = moves[2]
         let options
         if(triArr[i]===tri){
-             options = [triArr[i-opt1],triArr[i-opt2]]
+             options = [triArr[i-opt1],triArr[i-opt2],triArr[i-opt3]]
              options.forEach(opt=>{
                 if(opt===undefined){return window}
                 else{
-                opt.style = `border-bottom: 18rem solid gold;`
+                console.log(triArr[i-opt1].children)
+                console.log(triArr[i-opt2].children)
+                console.log(triArr[i+opt3].children)
+                opt.style = `border-bottom: 18rem solid gold;transition:.25s;`
+              
+                    
             }
              })
         }
@@ -216,14 +221,20 @@ if((/player/).test(who)){
 }
 else{
     for(let i=0; i<triArr.length;i++){
-        let opt1 = moves[0], opt2 = moves[1]
+        let opt1 = moves[0], opt2 = moves[1],opt3 = moves[2]
         let options
         if(triArr[i]===tri){
-            options = [triArr[i+opt1],triArr[i+opt2]]
-            options.forEach(opt=>{
+            options = [triArr[i+opt1],triArr[i+opt2],triArr[i+opt3]]
+            options.forEach((opt,index)=>{
             if(opt===undefined){return window}
             else{
-                opt.style = `border-bottom: 18rem solid gold;`
+                
+                    opt.style = `border-bottom: 18rem solid gold;transition:.25s;`
+                    console.log(triArr[i+opt1].children)
+                    console.log(triArr[i+opt2].children)
+                    console.log(triArr[i+opt3].children)
+                
+                
             }
             })
         }
@@ -240,13 +251,15 @@ let triOption = event.currentTarget
 // console.log(available_moves)
 
 if((/player/).test(currentPlayer)) movesFromTriangle(triOption,available_moves,'player')
-if((/computer/).test(currentPlayer))movesFromTriangle(triOption,available_moves,'computer')
+if((/computer/).test(currentPlayer)) movesFromTriangle(triOption,available_moves,'computer')
 
 
 }
 const hoverTriangle = (event) => {
 let triOption = event.currentTarget
 triOption.style = `border-bottom: 18rem solid gold;`
+if((/player/).test(currentPlayer)) movesFromTriangle(triOption,available_moves,'player')
+if((/computer/).test(currentPlayer))movesFromTriangle(triOption,available_moves,'computer')
 }
 const leaveTriangle = () => {
     triArr.forEach((tri,i)=>i%2!==0 ? tri.style = `transition:.25s;${gray}` : tri.style = `transition:.25s;${brown}`)
