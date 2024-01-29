@@ -24,6 +24,7 @@ let lastRollComp,lastRollPlayer
 const gray = `border-bottom: 18rem solid grey;`
 const brown = `border-bottom: 18rem solid brown;`
 let compMove = false, playerMove = false;
+let triContainers = document.querySelectorAll('tri-container')
 //change triangle colors with modulo
 triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
 
@@ -53,8 +54,7 @@ side2Arr.forEach(tri=>{
     let triY=tri.getBoundingClientRect().y+tri.getBoundingClientRect().height
         tri.style=`transform:translate(0,${(side2Btm - triY)}px)`
 })
-
-// after each player finishes their move
+// clear dice after each player finishes their move
 function clearDice(){
     allDice.forEach(d=>{
         d.classList.remove('appear')
@@ -132,18 +132,27 @@ for(let x = 0; x < betArr2.length; x++){
 }
 
 let arr = [betArr,betArr2];
-
+let circ1 = []
+let circ2 = []
 setTimeout(()=>{
     arr.forEach((side,index) =>{
         let children = [...side]
         let lastRoll = children[side.length-1]
-        console.log(lastRoll)
+        // console.log(lastRoll)
         if(index===0){
-            lastRollComp = lastRoll.children.length
+            lastRollComp = [...lastRoll.children].forEach(c=>{
+                let children = c.children
+                circ1.push(...children)
+            })
         }
         else{
-            lastRollPlayer = lastRoll.children.length
+            lastRollPlayer = [...lastRoll.children].forEach(c=>{
+                let children = c.children
+                circ2.push(...children)
+            })
         }
+        // console.log(circ1)
+        // console.log(circ2)
         children.forEach(child=>{
             if(child!==lastRoll){
                 child.classList.remove('appear')
@@ -155,44 +164,65 @@ setTimeout(()=>{
             }
         })
 })
-     odd = [...allDice].filter((x,i)=>i%2!==0).forEach(d=>d.classList.remove('dice-rotate-odd'))
-     even = [...allDice].filter((x,i)=>i%2==0).forEach(d=>d.classList.remove('dice-rotate-even'))
+    odd = [...allDice].filter((x,i)=>i%2!==0).forEach(d=>d.classList.remove('dice-rotate-odd'))
+    even = [...allDice].filter((x,i)=>i%2==0).forEach(d=>d.classList.remove('dice-rotate-even'))
     betArr=[]
     betArr2=[]
-    betBtn.style.pointerEvents="auto";
+    betBtn.style.pointerEvents="none";
     betBtn.classList.remove('disappear')
     betBtn.classList.add('appear')
     betBtn.removeAttribute('disabled',true)
     // console.log('CLEARED')
-    if(lastRollComp > lastRollPlayer){
-        setTimeout(()=>{
-                btnDisplay.textContent = 'Throw Dice' 
-        },3000)
+    if(circ1.length > circ2.length){
         theyPlay()
     }
-    if(lastRollComp < lastRollPlayer){
-        setTimeout(()=>{
-                btnDisplay.textContent = 'Throw Dice' 
-        },3000)
+    if(circ1.length < circ2.length){
         iPlay()
     }
-    if(lastRollComp===lastRollPlayer){
+    if(circ1.length===circ2.length){
         setTimeout(()=>{
-                btnDisplay.textContent = 'Throw Dice';
                 clearDice()
+                betBtn.style.pointerEvents="auto";
         },3000)
         tie()
     }
     },1150)
     
 }
+
+
+
+const showAvailableMoves = (who) =>{
+for(let i=0; i<triContainerArr.length; i++){
+    let children = triContainerArr[i].children
+    if(children.length>0){
+        for(let j=0; j<children.length; j++){
+            if(/player/.test(who)){
+                if(children[j].classList.contains('tile-p1')){
+                    console.log(children[j])
+                }
+            }
+            if(/computer/.test(who)){
+                if(children[j].classList.contains('tile-p2')){
+                    console.log(children[j])
+                }
+            }
+            
+        }
+    }
+}
+}
+
 // player plays
 function iPlay(){
     btnDisplay.textContent = 'Player moves first'
+    showAvailableMoves('player')
 }
 // computer plays
 function theyPlay(){
     btnDisplay.textContent = 'Computer moves first' 
+    showAvailableMoves('computer')
+
 }  
 // tie
 function tie(){
