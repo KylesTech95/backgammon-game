@@ -29,7 +29,7 @@ let triContainers = document.querySelectorAll('tri-container')
 triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
 
 
-// target player sides & bring them to edge of board
+// position triangles to edge of board
 for(let i=0;i<triContainerArr.length;i++){
     // console.log(triContainerArr[i])
     // testing for current y position in tri-containers
@@ -41,8 +41,6 @@ for(let i=0;i<triContainerArr.length;i++){
         side2Arr.push(triContainerArr[i])
     }
 }
-// console.log(side1Arr)
-// console.log(side2Arr)
 let side1Btm = side1.getBoundingClientRect().y
 let side2Btm = side2.getBoundingClientRect().y+side2.getBoundingClientRect().height
 
@@ -61,7 +59,6 @@ function clearDice(){
         d.classList.add('disappear')
     })
 }
-
 
 
 
@@ -195,20 +192,21 @@ setTimeout(()=>{
 const showAvailableMoves = (who) =>{
 for(let i=0; i<triContainerArr.length; i++){
     let children = triContainerArr[i].children
+    let p1Every = [...children].every(c=>c.classList.contains('tile-p1'))
+    let p2Every = [...children].every(c=>c.classList.contains('tile-p2'))
     if(children.length>0){
-        for(let j=0; j<children.length; j++){
-            if(/player/.test(who)){
-                if(children[j].classList.contains('tile-p1')){
-                    console.log(children[j])
+        if(/player/.test(who)){
+                if(p1Every){
+                    let triangle = triContainerArr[i].parentElement
+                    console.log(triangle)
                 }
             }
-            if(/computer/.test(who)){
-                if(children[j].classList.contains('tile-p2')){
-                    console.log(children[j])
+        if(/computer/.test(who)){
+                if(p2Every){
+                    let triangle = triContainerArr[i].parentElement
+                    console.log(triangle)
                 }
             }
-            
-        }
     }
 }
 }
