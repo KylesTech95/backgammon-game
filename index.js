@@ -193,11 +193,21 @@ setTimeout(()=>{
 const useTriangle = (event) => {
 let triOption = event.currentTarget
 console.log(triOption)
+
 }
+const hoverTriangle = (event) => {
+let triOption = event.currentTarget
+triOption.style = `border-bottom: 18rem solid gold;`
+}
+const leaveTriangle = () => {
+    triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
+    }
 const playMove = (who) => {
 for(let index=0; index<available.length;index++){
     available[index].classList.add('mouse-over')
     eventFn(available[index],'click',useTriangle)
+    eventFn(available[index],'mouseenter',hoverTriangle)
+    eventFn(available[index],'mouseleave',leaveTriangle)
 }
 }
 const showAvailableMoves = (who) =>{
