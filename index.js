@@ -1,22 +1,20 @@
 let triArr = document.querySelectorAll('.tri');
 let side1 = document.getElementById('side1')
-let side1Arr=[]
 let side2 = document.getElementById('side2')
+let side1Arr=[]
 let side2Arr=[]
+let betArr=[]
+let betArr2=[]
+let available = []
 let triContainerArr = document.querySelectorAll('.tri-container')
 let tiles = document.querySelectorAll('.tile')
 let allDice = document.querySelectorAll('.dice')
-let allDiceButMid = [...allDice].filter((_,i)=>i<5||i>6)
 let allLeftDice = document.getElementById('dice-container1')
 let allRightDice = document.getElementById('dice-container2')
 let firstLeftDice = allDice[5]
 let firstRightDice = allDice[6]
 let midDice = [firstLeftDice,firstRightDice]
 let btnDisplay = document.querySelector('.bet')
-let p1Bet
-let p2Bet
-let betArr = []
-let betArr2 = []
 let betBtn = document.querySelector('.bet')
 let dice_audio = document.querySelector('audio')
 let odd,even;
@@ -28,6 +26,10 @@ let triContainers = document.querySelectorAll('tri-container')
 //change triangle colors with modulo
 triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
 
+// Event listener module
+function eventFn(elem,type,func){
+    elem.addEventListener(type,func)
+}
 
 // position triangles to edge of board
 for(let i=0;i<triContainerArr.length;i++){
@@ -180,6 +182,7 @@ setTimeout(()=>{
         setTimeout(()=>{
                 clearDice()
                 betBtn.style.pointerEvents="auto";
+                btnDisplay.textContent = 'Throw Dice'
         },3000)
         tie()
     }
@@ -187,8 +190,16 @@ setTimeout(()=>{
     
 }
 
-
-
+const useTriangle = (event) => {
+let triOption = event.currentTarget
+console.log(triOption)
+}
+const playMove = (who) => {
+for(let index=0; index<available.length;index++){
+    available[index].classList.add('mouse-over')
+    eventFn(available[index],'click',useTriangle)
+}
+}
 const showAvailableMoves = (who) =>{
 for(let i=0; i<triContainerArr.length; i++){
     let children = triContainerArr[i].children
@@ -198,18 +209,28 @@ for(let i=0; i<triContainerArr.length; i++){
         if(/player/.test(who)){
                 if(p1Every){
                     let triangle = triContainerArr[i].parentElement
-                    console.log(triangle)
+                    // console.log(triangle)
+                    available.push(triangle)
                 }
             }
         if(/computer/.test(who)){
                 if(p2Every){
                     let triangle = triContainerArr[i].parentElement
-                    console.log(triangle)
+                    // console.log(triangle)
+                    available.push(triangle)
                 }
             }
     }
 }
+playMove(who)
 }
+
+
+
+
+
+
+//______________________________
 
 // player plays
 function iPlay(){

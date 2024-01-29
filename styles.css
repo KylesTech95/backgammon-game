@@ -242,6 +242,10 @@ justify-content: center; */
             }
 }
 
+.mouse-over{
+    cursor:pointer;
+    transition:.25s;
+}
 .triangle{
     height: 200px;
     width: 75px;
