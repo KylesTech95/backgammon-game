@@ -6,6 +6,7 @@ let side2Arr=[]
 let betArr=[]
 let betArr2=[]
 let available = []
+let available_moves;
 let triContainerArr = document.querySelectorAll('.tri-container')
 let tiles = document.querySelectorAll('.tile')
 let allDice = document.querySelectorAll('.dice')
@@ -73,7 +74,7 @@ let shuffleRandomDice = () => {
 if(!dice_audio.playing){
     dice_audio.play()
 }
-    // set pointer event for button to none
+    // set pointer event fofr button to none
     betBtn.style.pointerEvents="none";
     betBtn.setAttribute('disabled',true)
     betBtn.classList.add('disappear')
@@ -171,6 +172,9 @@ setTimeout(()=>{
     betBtn.classList.remove('disappear')
     betBtn.classList.add('appear')
     betBtn.removeAttribute('disabled',true)
+    
+    // store both dice into available_moves
+    available_moves = [circ1.length===0?1:circ1.length,circ2.length===0?1:circ2.length]
     // console.log('CLEARED')
     if(circ1.length > circ2.length){
         theyPlay()
@@ -189,10 +193,17 @@ setTimeout(()=>{
     },1150)
     
 }
-
+// determine which moves are available from the targeted triangle
+const movesFromTriangle = (tri,moves) => {
+console.log(tri)
+console.log(moves)
+}
+// user selects triangle to pick from
 const useTriangle = (event) => {
 let triOption = event.currentTarget
-console.log(triOption)
+// console.log(triOption)
+// console.log(available_moves)
+movesFromTriangle(triOption,available_moves)
 
 }
 const hoverTriangle = (event) => {
@@ -201,8 +212,8 @@ triOption.style = `border-bottom: 18rem solid gold;`
 }
 const leaveTriangle = () => {
     triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
-    }
-const playMove = (who) => {
+}
+const playMove = () => {
 for(let index=0; index<available.length;index++){
     available[index].classList.add('mouse-over')
     eventFn(available[index],'click',useTriangle)
@@ -211,6 +222,7 @@ for(let index=0; index<available.length;index++){
 }
 }
 const showAvailableMoves = (who) =>{
+    // console.log(available_moves)
 for(let i=0; i<triContainerArr.length; i++){
     let children = triContainerArr[i].children
     let p1Every = [...children].every(c=>c.classList.contains('tile-p1'))
@@ -232,8 +244,11 @@ for(let i=0; i<triContainerArr.length; i++){
             }
     }
 }
-playMove(who)
+playMove()
 }
+
+
+
 
 
 
