@@ -24,6 +24,7 @@ const gray = `border-bottom: 18rem solid grey;`
 const brown = `border-bottom: 18rem solid brown;`
 let compMove = false, playerMove = false;
 let triContainers = document.querySelectorAll('tri-container')
+let currentPlayer;
 //change triangle colors with modulo
 triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
 
@@ -194,16 +195,53 @@ setTimeout(()=>{
     
 }
 // determine which moves are available from the targeted triangle
-const movesFromTriangle = (tri,moves) => {
-console.log(tri)
-console.log(moves)
+const movesFromTriangle = (tri,moves,who) => {
+// console.log(tri)
+// console.log(moves)
+if((/player/).test(who)){
+    for(let i=0; i<triArr.length;i++){
+        let opt1 = moves[0], opt2 = moves[1]
+        let options
+        if(triArr[i]===tri){
+             options = [triArr[i-opt1],triArr[i-opt2]]
+             options.forEach(opt=>{
+                if(opt===undefined){return window}
+                else{
+                opt.style = `border-bottom: 18rem solid gold;`
+            }
+             })
+        }
+        // console.log(triArr[i])
+    }
+}
+else{
+    for(let i=0; i<triArr.length;i++){
+        let opt1 = moves[0], opt2 = moves[1]
+        let options
+        if(triArr[i]===tri){
+            options = [triArr[i+opt1],triArr[i+opt2]]
+            options.forEach(opt=>{
+            if(opt===undefined){return window}
+            else{
+                opt.style = `border-bottom: 18rem solid gold;`
+            }
+            })
+        }
+        // console.log(triArr[i])
+    }
+}
+
+
 }
 // user selects triangle to pick from
 const useTriangle = (event) => {
 let triOption = event.currentTarget
 // console.log(triOption)
 // console.log(available_moves)
-movesFromTriangle(triOption,available_moves)
+
+if((/player/).test(currentPlayer)) movesFromTriangle(triOption,available_moves,'player')
+if((/computer/).test(currentPlayer))movesFromTriangle(triOption,available_moves,'computer')
+
 
 }
 const hoverTriangle = (event) => {
@@ -211,15 +249,27 @@ let triOption = event.currentTarget
 triOption.style = `border-bottom: 18rem solid gold;`
 }
 const leaveTriangle = () => {
-    triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
+    triArr.forEach((tri,i)=>i%2!==0 ? tri.style = `transition:.25s;${gray}` : tri.style = `transition:.25s;${brown}`)
 }
-const playMove = () => {
-for(let index=0; index<available.length;index++){
-    available[index].classList.add('mouse-over')
-    eventFn(available[index],'click',useTriangle)
-    eventFn(available[index],'mouseenter',hoverTriangle)
-    eventFn(available[index],'mouseleave',leaveTriangle)
-}
+const playMove = (who) => {
+    if((/player/).test(who)){
+        for(let index=0; index<available.length;index++){
+            available[index].classList.add('mouse-over')
+            eventFn(available[index],'click',useTriangle)
+            eventFn(available[index],'mouseenter',hoverTriangle)
+            eventFn(available[index],'mouseleave',leaveTriangle)
+        }
+        }
+    if((/computer/).test(who)){
+        for(let index=0; index<available.length;index++){
+            available[index].classList.add('mouse-over')
+            eventFn(available[index],'click',useTriangle)
+            eventFn(available[index],'mouseenter',hoverTriangle)
+            eventFn(available[index],'mouseleave',leaveTriangle)
+                
+        }
+        }
+
 }
 const showAvailableMoves = (who) =>{
     // console.log(available_moves)
@@ -244,7 +294,12 @@ for(let i=0; i<triContainerArr.length; i++){
             }
     }
 }
-playMove()
+if(/player/.test(who)){
+    playMove(who)
+}
+if(/computer/.test(who)){
+    playMove(who)
+}
 }
 
 
@@ -261,12 +316,13 @@ playMove()
 function iPlay(){
     btnDisplay.textContent = 'Player moves first'
     showAvailableMoves('player')
+    currentPlayer = 'player'
 }
 // computer plays
 function theyPlay(){
     btnDisplay.textContent = 'Computer moves first' 
     showAvailableMoves('computer')
-
+    currentPlayer = 'computer'
 }  
 // tie
 function tie(){
