@@ -214,9 +214,12 @@ if((/player/).test(who)){
                 opt.style = `border-bottom: 18rem solid gold;transition:.25s;`;
                 let notMine = [...tiles]
                 // console.log(notMine)
-                notMine.forEach(m=>{
-                    if(m.classList.contains('tile-p2')){
-                        console.log('not my tile')
+                notMine.forEach((m,index)=>{
+                    let triDaddy = m.parentElement.parentElement
+                    if(m.classList.contains('tile-p2') && notMine.length > 1){
+                        // console.log(triDaddy)
+                        triDaddy.style = 'pointerEvents:none;';
+
                     }
                 })
                
@@ -243,9 +246,11 @@ else{
                 opt.style = `border-bottom: 18rem solid gold;transition:.25s;`
                 let notMine = [...tiles]
                 // console.log(notMine)
-                notMine.forEach(m=>{
-                    if(m.classList.contains('tile-p1')){
-                        console.log('not my tile')
+                notMine.forEach((m,index)=>{
+                    let triDaddy = m.parentElement.parentElement
+                    if(m.classList.contains('tile-p1') && notMine.length > 1){
+                        // console.log(triDaddy)
+                        triDaddy.style = 'pointerEvents:none;';
                     }
                 })
             }
@@ -260,6 +265,7 @@ else{
 
 
 }
+
 // user selects triangle to pick from
 const useTriangle = (event) => {
 let triOption = event.currentTarget
@@ -268,6 +274,8 @@ let triOption = event.currentTarget
 
 if((/player/).test(currentPlayer)) movesFromTriangle(triOption,available_moves,'player')
 if((/computer/).test(currentPlayer)) movesFromTriangle(triOption,available_moves,'computer')
+
+console.log(triOption``)
 
 
 }
