@@ -175,7 +175,7 @@ setTimeout(()=>{
     betBtn.removeAttribute('disabled',true)
     
     // store both dice into available_moves
-    available_moves = [circ1.length===0?1:circ1.length,circ2.length===0?1:circ2.length,circ1.length+circ2.length]
+    available_moves = [circ1.length===0?1:circ1.length,circ2.length===0?1:circ2.length,(circ1.length===0?1:circ1.length)+(circ2.length===0?1:circ2.length)]
     // console.log('CLEARED')
     if(circ1.length > circ2.length){
         theyPlay()
@@ -204,19 +204,28 @@ if((/player/).test(who)){
         let options
         if(triArr[i]===tri){
              options = [triArr[i-opt1],triArr[i-opt2],triArr[i-opt3]]
-             options.forEach(opt=>{
-                if(opt===undefined){return window}
+             
+             options.forEach((opt,j)=>{
+                let tiles = opt.children[0].children
+                if(opt===undefined){
+                    return window
+                }
                 else{
-                console.log(triArr[i-opt1].children)
-                console.log(triArr[i-opt2].children)
-                console.log(triArr[i+opt3].children)
-                opt.style = `border-bottom: 18rem solid gold;transition:.25s;`
-              
-                    
+                opt.style = `border-bottom: 18rem solid gold;transition:.25s;`;
+                let notMine = [...tiles]
+                // console.log(notMine)
+                notMine.forEach(m=>{
+                    if(m.classList.contains('tile-p2')){
+                        console.log('not my tile')
+                    }
+                })
+               
             }
+                    // console.log(options[0])
+                    // console.log(options[1])
+                    // console.log(options[2])
              })
         }
-        // console.log(triArr[i])
     }
 }
 else{
@@ -225,17 +234,24 @@ else{
         let options
         if(triArr[i]===tri){
             options = [triArr[i+opt1],triArr[i+opt2],triArr[i+opt3]]
-            options.forEach((opt,index)=>{
-            if(opt===undefined){return window}
-            else{
-                
-                    opt.style = `border-bottom: 18rem solid gold;transition:.25s;`
-                    console.log(triArr[i+opt1].children)
-                    console.log(triArr[i+opt2].children)
-                    console.log(triArr[i+opt3].children)
-                
-                
+            options.forEach((opt,j)=>{
+            let tiles = opt.children[0].children
+            if(opt===undefined){
+                return window
             }
+            else{
+                opt.style = `border-bottom: 18rem solid gold;transition:.25s;`
+                let notMine = [...tiles]
+                // console.log(notMine)
+                notMine.forEach(m=>{
+                    if(m.classList.contains('tile-p1')){
+                        console.log('not my tile')
+                    }
+                })
+            }
+                    // console.log(options[0])
+                    // console.log(options[1])
+                    // console.log(options[2])
             })
         }
         // console.log(triArr[i])
