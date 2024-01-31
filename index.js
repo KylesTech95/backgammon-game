@@ -205,7 +205,7 @@ if((/player/).test(who)){
         if(triArr[i]===tri){
              options = [triArr[i-opt1],triArr[i-opt2],triArr[i-opt3]]
              
-             options.forEach((opt,j)=>{
+             options = options.filter((x,i)=>[...x.children[0].children].every(tile=>!tile.classList.contains('tile-p2'))).forEach((opt,j)=>{
                 let tiles = opt.children[0].children
                 if(opt===undefined){
                     return window
@@ -214,14 +214,14 @@ if((/player/).test(who)){
                 opt.style = `border-bottom: 18rem solid gold;transition:.25s;`;
                 let notMine = [...tiles]
                 // console.log(notMine)
-                notMine.forEach((m,index)=>{
-                    let triDaddy = m.parentElement.parentElement
-                    if(m.classList.contains('tile-p2') && notMine.length > 1){
-                        // console.log(triDaddy)
-                        triDaddy.style = 'pointerEvents:none;';
+                // notMine.forEach((m,index)=>{
+                //     let triDaddy = m.parentElement.parentElement
+                //     if(m.classList.contains('tile-p2') && notMine.length > 1){
+                //         // console.log(triDaddy)
+                //         triDaddy.style = 'pointerEvents:none;';
 
-                    }
-                })
+                //     }
+                // })
                
             }
                     // console.log(options[0])
@@ -237,7 +237,7 @@ else{
         let options
         if(triArr[i]===tri){
             options = [triArr[i+opt1],triArr[i+opt2],triArr[i+opt3]]
-            options.forEach((opt,j)=>{
+            options = options.filter((x,i)=>[...x.children[0].children].every(tile=>!tile.classList.contains('tile-p1'))).forEach((opt,j)=>{
             let tiles = opt.children[0].children
             if(opt===undefined){
                 return window
@@ -246,13 +246,13 @@ else{
                 opt.style = `border-bottom: 18rem solid gold;transition:.25s;`
                 let notMine = [...tiles]
                 // console.log(notMine)
-                notMine.forEach((m,index)=>{
-                    let triDaddy = m.parentElement.parentElement
-                    if(m.classList.contains('tile-p1') && notMine.length > 1){
-                        // console.log(triDaddy)
-                        triDaddy.style = 'pointerEvents:none;';
-                    }
-                })
+                // notMine.forEach((m,index)=>{
+                //     let triDaddy = m.parentElement.parentElement
+                //     if(m.classList.contains('tile-p1') && notMine.length > 1){
+                //         // console.log(triDaddy)
+                //         triDaddy.style = 'pointerEvents:none;';
+                //     }
+                // })
             }
                     // console.log(options[0])
                     // console.log(options[1])
@@ -275,7 +275,7 @@ let triOption = event.currentTarget
 if((/player/).test(currentPlayer)) movesFromTriangle(triOption,available_moves,'player')
 if((/computer/).test(currentPlayer)) movesFromTriangle(triOption,available_moves,'computer')
 
-console.log(triOption``)
+console.log(triOption)
 
 
 }
