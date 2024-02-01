@@ -204,9 +204,9 @@ if((/player/).test(who)){
         let options
         if(triArr[i]===tri){
              options = [triArr[i-opt1],triArr[i-opt2],triArr[i-opt3]]
-             
-             options = options.filter((x,i)=>[...x.children[0].children].every(tile=>!tile.classList.contains('tile-p2'))).forEach((opt,j)=>{
+             options = options.filter((x,i)=>x!=undefined&&[...x.children[0].children].every(tile=>!tile.classList.contains('tile-p2'))).forEach((opt,j)=>{
                 let tiles = opt.children[0].children
+                
                 if(opt===undefined){
                     return window
                 }
@@ -237,7 +237,9 @@ else{
         let options
         if(triArr[i]===tri){
             options = [triArr[i+opt1],triArr[i+opt2],triArr[i+opt3]]
-            options = options.filter((x,i)=>[...x.children[0].children].every(tile=>!tile.classList.contains('tile-p1'))).forEach((opt,j)=>{
+            console.log(options)
+
+            options = options.filter((x,i)=>x!=undefined&&[...x.children[0].children].every(tile=>!tile.classList.contains('tile-p1'))).forEach((opt,j)=>{
             let tiles = opt.children[0].children
             if(opt===undefined){
                 return window
