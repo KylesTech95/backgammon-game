@@ -200,10 +200,12 @@ setTimeout(()=>{
     },1150)
     
 }
+let counter = 0;
 
-let h = 33;
 // moveOption
 const moveOpt = (event) => {
+    counter++
+    if(counter <= 2){
     let opt = event.currentTarget
     let container = opt.children[0];
     let tile = daddyTri.children[0]
@@ -212,7 +214,6 @@ const moveOpt = (event) => {
     let currentTile = tile.children[0]
     currentTile.style='background:red;'
     if(currentTile){
-        h+=33
         container
         let take = tile.removeChild(currentTile)
         container.appendChild(take)
@@ -222,6 +223,8 @@ const moveOpt = (event) => {
     else{
         console.log('no more tiles')
     }
+
+}
 
 }
 // determine which moves are available from the targeted triangle
