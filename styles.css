@@ -347,11 +347,13 @@ left:4px;
 }
 .tri-container{
     width:100px;
+    border:3px solid pink;
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap:4px;
+    gap:0;
+    margin-top:-8px;
     
 }
 
