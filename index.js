@@ -25,6 +25,7 @@ const brown = `border-bottom: 18rem solid brown;`
 let compMove = false, playerMove = false;
 let triContainers = document.querySelectorAll('tri-container')
 let currentPlayer;
+let daddyTri;
 //change triangle colors with modulo
 triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
 
@@ -32,6 +33,11 @@ triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
 function eventFn(elem,type,func){
     elem.addEventListener(type,func)
 }
+function passTile(elem,option){
+daddyTri = elem;
+eventFn(option,'click',moveOpt)
+}
+
 
 // position triangles to edge of board
 for(let i=0;i<triContainerArr.length;i++){
@@ -194,6 +200,17 @@ setTimeout(()=>{
     },1150)
     
 }
+
+
+// moveOption
+const moveOpt = (event) => {
+    let opt = event.currentTarget
+    let container = opt.children[0];
+    let tile = daddyTri.children[0]
+    console.log(tile)
+    console.log(container)
+
+}
 // determine which moves are available from the targeted triangle
 const movesFromTriangle = (tri,moves,who) => {
 // console.log(tri)
@@ -205,30 +222,17 @@ if((/player/).test(who)){
         if(triArr[i]===tri){
              options = [triArr[i-opt1],triArr[i-opt2],triArr[i-opt3]]
              options = options.filter((x,i)=>x!=undefined&&[...x.children[0].children].every(tile=>!tile.classList.contains('tile-p2'))).forEach((opt,j)=>{
-                let tiles = opt.children[0].children
                 
                 if(opt===undefined){
                     return window
                 }
                 else{
-                opt.style = `border-bottom: 18rem solid gold;transition:.25s;`;
-                let notMine = [...tiles]
-                // console.log(notMine)
-                // notMine.forEach((m,index)=>{
-                //     let triDaddy = m.parentElement.parentElement
-                //     if(m.classList.contains('tile-p2') && notMine.length > 1){
-                //         // console.log(triDaddy)
-                //         triDaddy.style = 'pointerEvents:none;';
-
-                //     }
-                // })
-               
-            }
-                    // console.log(options[0])
-                    // console.log(options[1])
-                    // console.log(options[2])
+                opt.style = `border-bottom: 18rem solid gold;transition:.25s;`;   
+                
+               }        
+               passTile(triArr[i],opt) 
              })
-        }
+         }
     }
 }
 else{
@@ -237,8 +241,6 @@ else{
         let options
         if(triArr[i]===tri){
             options = [triArr[i+opt1],triArr[i+opt2],triArr[i+opt3]]
-            console.log(options)
-
             options = options.filter((x,i)=>x!=undefined&&[...x.children[0].children].every(tile=>!tile.classList.contains('tile-p1'))).forEach((opt,j)=>{
             let tiles = opt.children[0].children
             if(opt===undefined){
@@ -246,22 +248,10 @@ else{
             }
             else{
                 opt.style = `border-bottom: 18rem solid gold;transition:.25s;`
-                let notMine = [...tiles]
-                // console.log(notMine)
-                // notMine.forEach((m,index)=>{
-                //     let triDaddy = m.parentElement.parentElement
-                //     if(m.classList.contains('tile-p1') && notMine.length > 1){
-                //         // console.log(triDaddy)
-                //         triDaddy.style = 'pointerEvents:none;';
-                //     }
-                // })
             }
-                    // console.log(options[0])
-                    // console.log(options[1])
-                    // console.log(options[2])
+            passTile(triArr[i],opt) 
             })
         }
-        // console.log(triArr[i])
     }
 }
 
@@ -276,8 +266,6 @@ let triOption = event.currentTarget
 
 if((/player/).test(currentPlayer)) movesFromTriangle(triOption,available_moves,'player')
 if((/computer/).test(currentPlayer)) movesFromTriangle(triOption,available_moves,'computer')
-
-console.log(triOption)
 
 
 }
@@ -295,7 +283,7 @@ const playMove = (who) => {
         for(let index=0; index<available.length;index++){
             available[index].classList.add('mouse-over')
             eventFn(available[index],'click',useTriangle)
-            eventFn(available[index],'mouseenter',hoverTriangle)
+            // eventFn(available[index],'mouseenter',hoverTriangle)
             eventFn(available[index],'mouseleave',leaveTriangle)
         }
         }
@@ -303,7 +291,7 @@ const playMove = (who) => {
         for(let index=0; index<available.length;index++){
             available[index].classList.add('mouse-over')
             eventFn(available[index],'click',useTriangle)
-            eventFn(available[index],'mouseenter',hoverTriangle)
+            // eventFn(available[index],'mouseenter',hoverTriangle)
             eventFn(available[index],'mouseleave',leaveTriangle)
                 
         }
