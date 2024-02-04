@@ -5,7 +5,11 @@ let side1Arr=[]
 let side2Arr=[]
 let betArr=[]
 let betArr2=[]
+let arr = [betArr,betArr2];
+let circ1 = []
+let circ2 = []
 let available = []
+let diceSum;
 let available_moves;
 let triContainerArr = document.querySelectorAll('.tri-container')
 let tiles = document.querySelectorAll('.tile')
@@ -64,16 +68,21 @@ side2Arr.forEach(tri=>{
 })
 // clear dice after each player finishes their move
 function clearDice(){
-    allDice.forEach(d=>{
-        d.classList.remove('appear')
-        d.classList.add('disappear')
-    })
+    setTimeout(()=>{
+        allDice.forEach(d=>{
+            d.classList.remove('appear')
+            d.classList.add('disappear')
+        })
+        betBtn.textContent = ((/player/).test(currentPlayer)) ? `Computer's Turn` : `Player's turn`
+    },1000)
+
+   
 }
 
 
 
 // shuffle dice
-let shuffleRandomDice = () => {
+let challengeCoin = () => {
    odd = [...allDice].filter((x,i)=>i%2!==0).forEach(d=>d.classList.add('dice-rotate-odd'))
    even = [...allDice].filter((x,i)=>i%2==0).forEach(d=>d.classList.add('dice-rotate-even'))
 
@@ -138,9 +147,6 @@ for(let x = 0; x < betArr2.length; x++){
     },175*(x+1))
 }
 
-let arr = [betArr,betArr2];
-let circ1 = []
-let circ2 = []
 setTimeout(()=>{
     arr.forEach((side,index) =>{
         let children = [...side]
@@ -173,8 +179,6 @@ setTimeout(()=>{
 })
     odd = [...allDice].filter((x,i)=>i%2!==0).forEach(d=>d.classList.remove('dice-rotate-odd'))
     even = [...allDice].filter((x,i)=>i%2==0).forEach(d=>d.classList.remove('dice-rotate-even'))
-    betArr=[]
-    betArr2=[]
     betBtn.style.pointerEvents="none";
     betBtn.classList.remove('disappear')
     betBtn.classList.add('appear')
@@ -183,6 +187,7 @@ setTimeout(()=>{
     // store both dice into available_moves
     available_moves = [circ1.length===0?1:circ1.length,circ2.length===0?1:circ2.length,(circ1.length===0?1:circ1.length)+(circ2.length===0?1:circ2.length)]
     // console.log('CLEARED')
+    diceSum = (circ1.length===0?1:circ1.length) + (circ2.length===0?1:circ2.length)
     if(circ1.length > circ2.length){
         theyPlay()
     }
@@ -197,34 +202,66 @@ setTimeout(()=>{
         },3000)
         tie()
     }
-    },1150)
-    
+},1150)
+}
+//calculate distance from endpoint to startpoint
+const theDistance = (end,start,c1,c2) => {
+    let e,s,res
+    for(let i = 0; i < triArr.length; i++){
+        let tCon = triArr[i].children[0];
+        if(tCon === end)e=i
+        if(tCon === start) s=i
+            res = Math.abs(s-e);
+    }
+        switch(true){
+        case res === diceSum:
+        console.log('IT EQUALS DICE SUM')
+        clearDice();
+        break;
+        case res === c1:
+        console.log('EQUALS LEFT DICE')
+        break;
+        case res === c2:
+        console.log('EQUALS RIGHT DICE')
+        break;
+        default:
+        console.log('undefined')
+        break;
+    }
+
 }
 let counter = 0;
-
 // moveOption
 const moveOpt = (event) => {
     counter++
-    if(counter <= 2){
+    
+    // console.log(diceSum)
+    let c1 = circ1.length===0?1:circ1.length
+    let c2 = circ2.length===0?1:circ2.length
     let opt = event.currentTarget
     let container = opt.children[0];
     let tile = daddyTri.children[0]
-    console.log(tile)
-    console.log(container)
     let currentTile = tile.children[0]
-    currentTile.style='background:red;'
+    
+
+    // if player utilizes the sum of both dice
+   theDistance(container,tile,c1,c2)
+    // if the player utilizes both dice
+    if(counter < 3){
+    currentTile.style='background:red;transition:.25s;'
     if(currentTile){
-        container
         let take = tile.removeChild(currentTile)
         container.appendChild(take)
         container.style=`transform:translate(0,25px)`
-        console.log(take)
     }
-    else{
-        console.log('no more tiles')
-    }
-
 }
+else{
+    clearDice()
+    console.log('You are done playing this round.')
+}
+console.log(container)
+console.log(tile)
+console.log(c1,c2)
 
 }
 // determine which moves are available from the targeted triangle
@@ -273,7 +310,6 @@ else{
 
 
 }
-
 // user selects triangle to pick from
 const useTriangle = (event) => {
 let triOption = event.currentTarget
