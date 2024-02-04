@@ -30,6 +30,7 @@ let compMove = false, playerMove = false;
 let triContainers = document.querySelectorAll('tri-container')
 let currentPlayer;
 let daddyTri;
+let counter = 0;
 //change triangle colors with modulo
 triArr.forEach((tri,i)=>i%2!==0 ? tri.style = gray : tri.style = brown)
 
@@ -41,7 +42,6 @@ function passTile(elem,option){
 daddyTri = elem;
 eventFn(option,'click',moveOpt)
 }
-
 
 // position triangles to edge of board
 for(let i=0;i<triContainerArr.length;i++){
@@ -68,86 +68,113 @@ side2Arr.forEach(tri=>{
 })
 // clear dice after each player finishes their move
 function clearDice(){
+    triArr.forEach(t=>t.classList.add('no-pointer'))
+    console.log('You are done playing this round.')
+    lastRollComp = [];
+    lastRollPlayer = [];
     setTimeout(()=>{
         allDice.forEach(d=>{
             d.classList.remove('appear')
             d.classList.add('disappear')
         })
-        betBtn.textContent = ((/player/).test(currentPlayer)) ? `Computer's Turn` : `Player's turn`
     },1000)
 
    
 }
 
+const nextPlayer = () => {
+    betBtn.classList.remove('no-pointer')
+    setTimeout(()=>{
+        if((/player/).test(currentPlayer)){
+            betBtn.textContent = `Computer's turn`
+            currentPlayer = 'computer'
+            playMove('computer')
+        } 
+        else{
+            betBtn.textContent = `Player's turn`
+            currentPlayer = 'palyer'
+            playMove('player')
+        }
+    },1000)
+}
+
+let shuffleDice = () => {
+    triArr.forEach(t=>t.classList.remove('no-pointer'))
+    odd = [...allDice].filter((x,i)=>i%2!==0).forEach(d=>d.classList.add('dice-rotate-odd'))
+    even = [...allDice].filter((x,i)=>i%2==0).forEach(d=>d.classList.add('dice-rotate-even'))
+ 
 
 
-// shuffle dice
+    
+ //start shuffle audio
+ if(!dice_audio.playing){
+     dice_audio.play()
+ }
+     // set pointer event fofr button to none
+     betBtn.classList.remove('no-pointer');
+     betBtn.setAttribute('disabled',true)
+     betBtn.classList.add('disappear')
+     betBtn.classList.remove('appear')
+     let leftDice = [...allLeftDice.children]
+     let rightDice = [...allRightDice.children]
+ 
+ for(let i = 0; i < leftDice.length; i++){
+     let random = leftDice[Math.floor(Math.random()*leftDice.length)]
+     betArr.push(random)
+ }
+ for(let x = 0; x < betArr.length; x++){
+     let lefty = leftDice[x]
+     lefty=betArr[x]
+ 
+     setTimeout(()=>{
+         lefty.classList.remove('disappear')
+         lefty.classList.add('appear')
+         if(x<betArr.length-1){
+             setTimeout(()=>{
+                 lefty.classList.add('disappear')
+                 lefty.classList.remove('appear') 
+             },175)
+         }
+         else{
+                 lefty.classList.remove('disappear')
+                 lefty.classList.add('appear') 
+             
+         }
+     },175*(x+1))
+ }
+ for(let i = 0; i < rightDice.length; i++){
+     let random = rightDice[Math.floor(Math.random()*rightDice.length)]
+     betArr2.push(random)
+ }
+ for(let x = 0; x < betArr2.length; x++){
+     let righty = rightDice[x]
+     righty=betArr2[x]
+     setTimeout(()=>{
+         
+         righty.classList.remove('disappear')
+         righty.classList.add('appear')
+         if(x<betArr2.length-1){
+             setTimeout(()=>{
+                 righty.classList.add('disappear')
+                 righty.classList.remove('appear') 
+             },175)
+             
+         }
+         else{
+             righty.classList.remove('disappear')
+             righty.classList.add('appear')  
+         }
+     },175*(x+1))
+ }
+}
+
+
+
+
+// challenge (beginning of game)
 let challengeCoin = () => {
-   odd = [...allDice].filter((x,i)=>i%2!==0).forEach(d=>d.classList.add('dice-rotate-odd'))
-   even = [...allDice].filter((x,i)=>i%2==0).forEach(d=>d.classList.add('dice-rotate-even'))
-
-//start shuffle audio
-if(!dice_audio.playing){
-    dice_audio.play()
-}
-    // set pointer event fofr button to none
-    betBtn.style.pointerEvents="none";
-    betBtn.setAttribute('disabled',true)
-    betBtn.classList.add('disappear')
-    betBtn.classList.remove('appear')
-    let leftDice = [...allLeftDice.children]
-    let rightDice = [...allRightDice.children]
-
-for(let i = 0; i < leftDice.length; i++){
-    let random = leftDice[Math.floor(Math.random()*leftDice.length)]
-    betArr.push(random)
-}
-for(let x = 0; x < betArr.length; x++){
-    let lefty = leftDice[x]
-    lefty=betArr[x]
-
+    shuffleDice()
     setTimeout(()=>{
-        lefty.classList.remove('disappear')
-        lefty.classList.add('appear')
-        if(x<betArr.length-1){
-            setTimeout(()=>{
-                lefty.classList.add('disappear')
-                lefty.classList.remove('appear') 
-            },175)
-        }
-        else{
-                lefty.classList.remove('disappear')
-                lefty.classList.add('appear') 
-            
-        }
-    },175*(x+1))
-}
-for(let i = 0; i < rightDice.length; i++){
-    let random = rightDice[Math.floor(Math.random()*rightDice.length)]
-    betArr2.push(random)
-}
-for(let x = 0; x < betArr2.length; x++){
-    let righty = rightDice[x]
-    righty=betArr2[x]
-    setTimeout(()=>{
-        
-        righty.classList.remove('disappear')
-        righty.classList.add('appear')
-        if(x<betArr2.length-1){
-            setTimeout(()=>{
-                righty.classList.add('disappear')
-                righty.classList.remove('appear') 
-            },175)
-            
-        }
-        else{
-            righty.classList.remove('disappear')
-            righty.classList.add('appear')  
-        }
-    },175*(x+1))
-}
-
-setTimeout(()=>{
     arr.forEach((side,index) =>{
         let children = [...side]
         let lastRoll = children[side.length-1]
@@ -179,7 +206,7 @@ setTimeout(()=>{
 })
     odd = [...allDice].filter((x,i)=>i%2!==0).forEach(d=>d.classList.remove('dice-rotate-odd'))
     even = [...allDice].filter((x,i)=>i%2==0).forEach(d=>d.classList.remove('dice-rotate-even'))
-    betBtn.style.pointerEvents="none";
+    betBtn.classList.add('no-pointer')
     betBtn.classList.remove('disappear')
     betBtn.classList.add('appear')
     betBtn.removeAttribute('disabled',true)
@@ -197,7 +224,7 @@ setTimeout(()=>{
     if(circ1.length===circ2.length){
         setTimeout(()=>{
                 clearDice()
-                betBtn.style.pointerEvents="auto";
+                betBtn.classList.remove('no-pointer')
                 btnDisplay.textContent = 'Throw Dice'
         },3000)
         tie()
@@ -207,22 +234,25 @@ setTimeout(()=>{
 //calculate distance from endpoint to startpoint
 const theDistance = (end,start,c1,c2) => {
     let e,s,res
+    let parent = end.parentElement //tri triangle
     for(let i = 0; i < triArr.length; i++){
         let tCon = triArr[i].children[0];
         if(tCon === end)e=i
         if(tCon === start) s=i
-            res = Math.abs(s-e);
+            res = Math.abs(s-e)
     }
         switch(true){
         case res === diceSum:
-        console.log('IT EQUALS DICE SUM')
+        nextPlayer()
         clearDice();
         break;
         case res === c1:
         console.log('EQUALS LEFT DICE')
+        parent.classList.add('no-pointer')
         break;
         case res === c2:
         console.log('EQUALS RIGHT DICE')
+        parent.classList.add('no-pointer')
         break;
         default:
         console.log('undefined')
@@ -230,38 +260,41 @@ const theDistance = (end,start,c1,c2) => {
     }
 
 }
-let counter = 0;
 // moveOption
 const moveOpt = (event) => {
-    counter++
-    
+    counter+=1
+    console.log(counter)
     // console.log(diceSum)
     let c1 = circ1.length===0?1:circ1.length
     let c2 = circ2.length===0?1:circ2.length
     let opt = event.currentTarget
+    console.log(opt)
     let container = opt.children[0];
     let tile = daddyTri.children[0]
     let currentTile = tile.children[0]
-    
-
+    let currSide = container.parentElement.parentElement
+    theDistance(container,tile,c1,c2)
+    // if the player utilizes one dice & then the other.
+    if(counter >= 2 ){
+        nextPlayer()
+        clearDice()
+        if(currentTile){
+            let take = tile.removeChild(currentTile)
+            container.appendChild(take)
+            container.style=`transform:translate(0,${currSide.id==='side1'?25 : -25}px)`
+        }
+}
+else{
     // if player utilizes the sum of both dice
-   theDistance(container,tile,c1,c2)
-    // if the player utilizes both dice
-    if(counter < 3){
-    currentTile.style='background:red;transition:.25s;'
     if(currentTile){
         let take = tile.removeChild(currentTile)
         container.appendChild(take)
-        container.style=`transform:translate(0,25px)`
+        container.style=`transform:translate(0,${currSide.id==='side1'?25 : -25}px)`
     }
 }
-else{
-    clearDice()
-    console.log('You are done playing this round.')
-}
-console.log(container)
-console.log(tile)
-console.log(c1,c2)
+// console.log(container)
+// console.log(tile)
+// console.log(c1,c2)
 
 }
 // determine which moves are available from the targeted triangle
